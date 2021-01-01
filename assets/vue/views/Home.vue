@@ -1,7 +1,9 @@
 <template>
   <div>
     <div class="row col">
-      <h1>Homepage</h1>
+      <h1>
+        Homepage
+      </h1>
     </div>
 
     <div class="row col">

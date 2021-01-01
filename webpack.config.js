@@ -59,6 +59,8 @@ Encore
     // enables Vue.js support
     .enableVueLoader()
 
+    .enablePostCssLoader()
+
     // enable ESLint
     .addLoader({
         enforce: 'pre',
