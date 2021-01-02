@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="flex items-center mr-2 md:hidden">
+    <div class="flex h-full items-center mr-2 md:hidden">
       <button
         id="button-menu"
         class="inline-flex justify-center items-center p-2 text-gray-400 rounded-md transition duration-150 ease-in-out hover:text-white hover:bg-gray-700 focus:outline-none"
@@ -39,11 +39,10 @@
       </button>
     </div>
 
-    <div class="hidden mr-2 md:ml-6 md:flex md:items-center">
+    <div class="hidden mr-2 h-full md:ml-6 md:flex md:items-center">
       <router-link
         class="py-2 px-1 font-medium leading-5 text-gray-300 rounded-md transition duration-150 ease-in-out lg:px-3 lg:text-lg hover:text-white hover:bg-gray-700 focus:outline-none"
         to="/home"
-        exact
       >
         Accueil
       </router-link>
@@ -73,30 +72,30 @@
     >
       <div class="px-2 pt-2 pb-3 bg-gray-800 sm:px-3">
         <router-link
-          class="block py-2 px-3 text-2xl font-medium text-white rounded-md transition duration-150 ease-in-out hover:bg-gray-700 focus:outline-none"
-          to="/"
-          @click="toggle"
+          class="block py-2 px-3 text-2xl font-medium text-gray-300 rounded-md transition duration-150 ease-in-out hover:bg-gray-700 focus:outline-none"
+          to="/home"
+          @click.native="toggle"
         >
           Accueil
         </router-link>
         <router-link
           class="block py-2 px-3 mt-1 text-2xl font-medium text-gray-300 rounded-md transition duration-150 ease-in-out hover:text-white hover:bg-gray-700 focus:outline-none"
           to="/informations"
-          @click="toggle"
+          @click.native="toggle"
         >
           Informations
         </router-link>
         <router-link
           class="block py-2 px-3 mt-1 text-2xl font-medium text-gray-300 rounded-md transition duration-150 ease-in-out hover:text-white hover:bg-gray-700 focus:outline-none"
           to="/photos"
-          @click="toggle"
+          @click.native="toggle"
         >
           Photos
         </router-link>
         <router-link
           class="block py-2 px-3 mt-1 text-2xl font-medium text-gray-300 rounded-md transition duration-150 ease-in-out hover:text-white hover:bg-gray-700 focus:outline-none"
           to="/contact"
-          @click="toggle"
+          @click.native="toggle"
         >
           Contact
         </router-link>
