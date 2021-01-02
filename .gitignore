@@ -16,6 +16,7 @@
 ### The change made to a file
 ### Example the .env environment file
 .env
+.env.local
 
 ### Jetbrain
 /.idea/
@@ -26,3 +27,8 @@
 npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
