@@ -1,46 +1,18 @@
 <template>
-  <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <router-link
-        class="navbar-brand"
-        to="/home"
-      >
-        App
-      </router-link>
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarNav"
-        aria-controls="navbarNav"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-      >
-        <span class="navbar-toggler-icon" />
-      </button>
-      <div
-        id="navbarNav"
-        class="collapse navbar-collapse"
-      >
-        <ul class="navbar-nav">
-          <router-link
-            class="nav-item"
-            tag="li"
-            to="/home"
-            active-class="active"
-          >
-            <a class="nav-link">Home</a>
-          </router-link>
-        </ul>
-      </div>
-    </nav>
-
-    <router-view />
+  <div class="flex flex-col">
+    <AppHeader class="self-start w-full" />
+    <router-view class="h-full" />
+    <AppFooter class="self-end w-full" />
   </div>
 </template>
 
-<script>
-export default {
+<script lang="ts">
+import Vue from "vue";
+import AppHeader from "./components/commun/header/Header.vue";
+import AppFooter from "./components/commun/footer/Footer.vue";
+
+export default Vue.extend({
   name: "App",
-}
+  components: { AppHeader, AppFooter }
+});
 </script>
