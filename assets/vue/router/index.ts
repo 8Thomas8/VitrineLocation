@@ -4,8 +4,6 @@ import Home from "../views/Home.vue";
 import Informations from "../views/Informations.vue";
 import Photos from "../views/Photos.vue";
 import Contact from "../views/Contact.vue";
-import Login from "../views/Login.vue";
-import Signin from "../views/Signin.vue";
 
 Vue.use(VueRouter);
 
@@ -33,16 +31,6 @@ export default new VueRouter({
       path: "/contact",
       name: "Contact",
       component: Contact
-    },
-    {
-      path: "/login",
-      name: "Login",
-      component: Login
-    },
-    {
-      path: "/signin",
-      name: "Signin",
-      component: Signin
     },
     {
       path: "*",
