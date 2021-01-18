@@ -14,9 +14,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\SerializerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+
 
 /**
  * @Rest\Route("/api")
+ * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
 final class FeatureController extends AbstractController
 {
@@ -36,19 +39,24 @@ final class FeatureController extends AbstractController
      * @param Request $request
      * @return JsonResponse
      * @Rest\Post("/features", name="createFeature")
+     * @IsGranted ("ROLE_FOO")
      */
     public function createAction(Request $request): JsonResponse
     {
-        $message = $request->request->get('message');
-        if (empty($message)) {
-            throw new BadRequestHttpException('message cannot be empty');
-        }
+        $content = $request->toArray();
+        $title = $content['title'];
+        $message = $content['message'];
+
         if (empty($title)) {
-            throw new BadRequestHttpException('title cannot be empty');
+            throw new BadRequestHttpException('Title cannot be empty');
         }
+        if (empty($message)) {
+            throw new BadRequestHttpException('Message cannot be empty');
+        }
+
         $feature = new Feature();
-        $feature->setMessage($message);
         $feature->setTitle($title);
+        $feature->setMessage($message);
         $this->em->persist($feature);
         $this->em->flush();
         $data = $this->serializer->serialize($feature, JsonEncoder::FORMAT);

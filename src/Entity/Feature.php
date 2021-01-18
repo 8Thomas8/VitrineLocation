@@ -94,7 +94,7 @@ class Feature
 
     public function setTitle(string $title): void
     {
-        $this->message = $title;
+        $this->title = $title;
     }
 
     public function getCreated(): DateTime
