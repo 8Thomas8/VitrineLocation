@@ -74,4 +74,54 @@ final class FeatureController extends AbstractController
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
     }
+
+    /**
+     * @Rest\Get("/features/{id}", name="findOneFeature")
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function findOneAction(string $id): JsonResponse
+    {
+        $feature = $this->em->getRepository(Feature::class)->find($id);
+        $data = $this->serializer->serialize($feature, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * @Rest\Put("/features/{id}", name="UpdateOneFeature")
+     * @param Request $request
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function updateOneAction(Request $request, string $id): JsonResponse
+    {
+        $feature = $this->em->getRepository(Feature::class)->find($id);
+        $featureUpdated = json_decode($request->getContent(), true);
+
+        empty($featureUpdated['title']) ? true : $feature->setTitle($featureUpdated['title']);
+        empty($featureUpdated['message']) ? true : $feature->setMessage($featureUpdated['message']);
+
+        $this->em->persist($feature);
+        $this->em->flush();
+        $data = $this->serializer->serialize($feature, JsonEncoder::FORMAT);
+
+        return new JsonResponse($data, Response::HTTP_OK, [], true);
+    }
+
+    /**
+     * @Rest\Delete("/features/{id}", name="DeleteOneFeature")
+     * @param Request $request
+     * @param string $id
+     * @return JsonResponse
+     */
+    public function deleteOneAction(string $id): JsonResponse
+    {
+        $feature = $this->em->getRepository(Feature::class)->find($id);
+
+        $this->em->remove($feature);
+        $this->em->flush();
+
+        return new JsonResponse("Feature deleted", Response::HTTP_OK, [], true);
+    }
 }
