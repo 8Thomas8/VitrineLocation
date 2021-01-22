@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
-use App\Entity\Feature;
+use App\Controller\ControllerInterface\EntityController;
+use App\Entity\Poi;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -21,7 +22,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @Rest\Route("/api")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
-final class FeatureController extends AbstractController
+final class PoiController extends AbstractController implements EntityController
 {
     /** @var EntityManagerInterface */
     private $em;
@@ -38,8 +39,8 @@ final class FeatureController extends AbstractController
     /**
      * @param Request $request
      * @return JsonResponse
-     * @Rest\Post("/features", name="createFeature")
-     * @IsGranted ("ROLE_FOO")
+     * @Rest\Post("/pois", name="createPoi")
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function createAction(Request $request): JsonResponse
     {
@@ -54,74 +55,73 @@ final class FeatureController extends AbstractController
             throw new BadRequestHttpException('Message cannot be empty');
         }
 
-        $feature = new Feature();
-        $feature->setTitle($title);
-        $feature->setMessage($message);
-        $this->em->persist($feature);
+        $poi = new Poi();
+        $poi->setTitle($title);
+        $poi->setMessage($message);
+        $this->em->persist($poi);
         $this->em->flush();
-        $data = $this->serializer->serialize($feature, JsonEncoder::FORMAT);
+        $data = $this->serializer->serialize($poi, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_CREATED, [], true);
     }
 
     /**
-     * @Rest\Get("/features", name="findAllFeatures")
+     * @Rest\Get("/pois", name="findAllPois")
      */
     public function findAllAction(): JsonResponse
     {
-        $features = $this->em->getRepository(Feature::class)->findBy([], ['id' => 'DESC']);
-        $data = $this->serializer->serialize($features, JsonEncoder::FORMAT);
+        $pois = $this->em->getRepository(Poi::class)->findBy([], ['id' => 'DESC']);
+        $data = $this->serializer->serialize($pois, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
     }
 
     /**
-     * @Rest\Get("/features/{id}", name="findOneFeature")
+     * @Rest\Get("/pois/{id}", name="findOnePoi")
      * @param string $id
      * @return JsonResponse
      */
     public function findOneAction(string $id): JsonResponse
     {
-        $feature = $this->em->getRepository(Feature::class)->find($id);
-        $data = $this->serializer->serialize($feature, JsonEncoder::FORMAT);
+        $poi = $this->em->getRepository(Poi::class)->find($id);
+        $data = $this->serializer->serialize($poi, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
     }
 
     /**
-     * @Rest\Put("/features/{id}", name="UpdateOneFeature")
+     * @Rest\Put("/pois/{id}", name="UpdateOnePoi")
      * @param Request $request
      * @param string $id
      * @return JsonResponse
      */
     public function updateOneAction(Request $request, string $id): JsonResponse
     {
-        $feature = $this->em->getRepository(Feature::class)->find($id);
-        $featureUpdated = json_decode($request->getContent(), true);
+        $poi = $this->em->getRepository(Poi::class)->find($id);
+        $poiUpdated = json_decode($request->getContent(), true);
 
-        empty($featureUpdated['title']) ? true : $feature->setTitle($featureUpdated['title']);
-        empty($featureUpdated['message']) ? true : $feature->setMessage($featureUpdated['message']);
+        empty($poiUpdated['title']) ? true : $poi->setTitle($poiUpdated['title']);
+        empty($poiUpdated['message']) ? true : $poi->setMessage($poiUpdated['message']);
 
-        $this->em->persist($feature);
+        $this->em->persist($poi);
         $this->em->flush();
-        $data = $this->serializer->serialize($feature, JsonEncoder::FORMAT);
+        $data = $this->serializer->serialize($poi, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
     }
 
     /**
-     * @Rest\Delete("/features/{id}", name="DeleteOneFeature")
-     * @param Request $request
+     * @Rest\Delete("/pois/{id}", name="DeleteOnePoi")
      * @param string $id
      * @return JsonResponse
      */
     public function deleteOneAction(string $id): JsonResponse
     {
-        $feature = $this->em->getRepository(Feature::class)->find($id);
+        $poi = $this->em->getRepository(Poi::class)->find($id);
 
-        $this->em->remove($feature);
+        $this->em->remove($poi);
         $this->em->flush();
 
-        return new JsonResponse("Feature deleted", Response::HTTP_OK, [], true);
+        return new JsonResponse("Poi deleted", Response::HTTP_OK, [], true);
     }
 }

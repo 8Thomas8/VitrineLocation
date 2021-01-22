@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\EntityInterface\Feature;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
@@ -12,10 +13,10 @@ use Ramsey\Uuid\UuidInterface;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="features")
+ * @ORM\Table(name="poi")
  * @ORM\HasLifecycleCallbacks
  */
-class Feature
+class Poi implements Feature
 {
     /**
      * @ORM\Id
@@ -74,6 +75,10 @@ class Feature
 
     public function getId(): UuidInterface
     {
+        if ($this->id == NULL) {
+            $this->id = Uuid::uuid4();
+        }
+
         return $this->id;
     }
 
@@ -97,13 +102,31 @@ class Feature
         $this->title = $title;
     }
 
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
+    }
+
     public function getCreated(): DateTime
     {
+        if ($this->created == NULL) {
+            $this->created = new DateTime('Now');
+        }
+
         return $this->created;
     }
 
-    public function getUpdated(): ?DateTime
+    public function setUpdated(DateTime $updated): void
     {
+        $this->updated = $updated;
+    }
+
+    public function getUpdated(): DateTime
+    {
+        if ($this->updated == NULL) {
+            $this->updated = new DateTime('Now');
+        }
+
         return $this->updated;
     }
 }
