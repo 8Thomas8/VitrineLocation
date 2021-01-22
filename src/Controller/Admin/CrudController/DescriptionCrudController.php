@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\CrudController;
 
-use App\Entity\Poi;
+use App\Entity\Description;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class  PoiCrudController extends AbstractCrudController
+class DescriptionCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Poi::class;
+        return Description::class;
     }
 
     /*

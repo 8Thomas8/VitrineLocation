@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
+use App\Entity\EntityInterface\Feature;
 use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
@@ -119,7 +120,6 @@ class Description implements Feature
     {
         $this->updated = $updated;
     }
-
 
     public function getUpdated(): DateTime
     {

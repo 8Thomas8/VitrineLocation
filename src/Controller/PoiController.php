@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Controller\ControllerInterface\EntityController;
 use App\Entity\Poi;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -21,7 +22,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @Rest\Route("/api")
  * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
-final class PoiController extends AbstractController
+final class PoiController extends AbstractController implements EntityController
 {
     /** @var EntityManagerInterface */
     private $em;

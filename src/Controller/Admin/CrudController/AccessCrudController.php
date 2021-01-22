@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\Admin\CrudController;
 
-use App\Entity\Description;
+use App\Entity\Access;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
-class DescriptionCrudController extends AbstractCrudController
+class  AccessCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Description::class;
+        return Access::class;
     }
 
     /*
