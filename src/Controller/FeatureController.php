@@ -111,7 +111,6 @@ final class FeatureController extends AbstractController
 
     /**
      * @Rest\Delete("/features/{id}", name="DeleteOneFeature")
-     * @param Request $request
      * @param string $id
      * @return JsonResponse
      */

@@ -74,6 +74,10 @@ class Feature
 
     public function getId(): UuidInterface
     {
+        if ($this->id == NULL) {
+            $this->id = Uuid::uuid4();
+        }
+
         return $this->id;
     }
 
@@ -97,13 +101,32 @@ class Feature
         $this->title = $title;
     }
 
+    public function setCreated(DateTime $created): void
+    {
+        $this->created = $created;
+    }
+
     public function getCreated(): DateTime
     {
+        if ($this->created == NULL) {
+            $this->created = new DateTime('Now');
+        }
+
         return $this->created;
     }
 
-    public function getUpdated(): ?DateTime
+    public function setUpdated(DateTime $updated): void
     {
+        $this->updated = $updated;
+    }
+
+
+    public function getUpdated(): DateTime
+    {
+        if ($this->updated == NULL) {
+            $this->updated = new DateTime('Now');
+        }
+
         return $this->updated;
     }
 }
