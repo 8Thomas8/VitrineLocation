@@ -2,7 +2,9 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Feature;
+use App\Entity\Access;
+use App\Entity\Description;
+use App\Entity\Poi;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -28,6 +30,8 @@ class DashboardController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         // links to the 'index' action of the Category CRUD controller
-       yield MenuItem::linkToCrud('Features', 'fa fa-tags', Feature::class);
+       yield MenuItem::linkToCrud('Descriptions', 'fa fa-tags', Description::class);
+       yield MenuItem::linkToCrud('POIs', 'fa fa-tags', Poi::class);
+       yield MenuItem::linkToCrud('Acces', 'fa fa-tags', Access::class);
     }
 }

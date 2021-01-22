@@ -2,18 +2,14 @@
 
 namespace App\Controller\Admin;
 
-use App\Entity\Feature;
+use App\Entity\Poi;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
-use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-class FeatureCrudController extends AbstractCrudController
+class  PoiCrudController extends AbstractCrudController
 {
     public static function getEntityFqcn(): string
     {
-        return Feature::class;
+        return Poi::class;
     }
 
     /*
