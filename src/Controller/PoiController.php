@@ -40,7 +40,7 @@ final class PoiController extends AbstractController implements EntityController
      * @param Request $request
      * @return JsonResponse
      * @Rest\Post("/pois", name="createPoi")
-     * @IsGranted ("ROLE_FOO")
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function createAction(Request $request): JsonResponse
     {

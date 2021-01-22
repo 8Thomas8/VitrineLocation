@@ -40,7 +40,7 @@ final class DescriptionController extends AbstractController implements EntityCo
      * @param Request $request
      * @return JsonResponse
      * @Rest\Post("/descriptions", name="createDescription")
-     * @IsGranted ("ROLE_FOO")
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function createAction(Request $request): JsonResponse
     {

@@ -40,7 +40,7 @@ final class AccessController extends AbstractController implements EntityControl
      * @param Request $request
      * @return JsonResponse
      * @Rest\Post("/accesss", name="createAccess")
-     * @IsGranted ("ROLE_FOO")
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function createAction(Request $request): JsonResponse
     {
