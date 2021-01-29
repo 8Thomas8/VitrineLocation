@@ -30,7 +30,7 @@
         "build": "encore production --progress"
     },
     "dependencies": {
-        "@tailwindcss/postcss7-compat": "^2.0.2",
+        "@tailwindcss/postcss7-compat": "npm:@tailwindcss/postcss7-compat",
         "autoprefixer": "9",
         "axios": "^0.21.1",
         "postcss": "7",
