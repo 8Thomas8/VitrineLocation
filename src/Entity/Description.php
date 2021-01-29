@@ -27,6 +27,13 @@ class Description implements Feature
     private $id;
 
     /**
+     * @ORM\Column(name="order", type="integer")
+     *
+     * @var integer
+     */
+    private $order;
+
+    /**
      * @ORM\Column(name="title", type="string")
      *
      * @var string
@@ -80,6 +87,26 @@ class Description implements Feature
         }
 
         return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder(): int
+    {
+        if ($this->order == NULL) {
+            $this->order = 0;
+        }
+
+        return $this->order;
+    }
+
+    /**
+     * @param int $order
+     */
+    public function setOrder(int $order): void
+    {
+        $this->order = $order;
     }
 
     public function getMessage(): string

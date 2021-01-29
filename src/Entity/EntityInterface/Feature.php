@@ -27,22 +27,4 @@ interface Feature
      * @ORM\PreUpdate
      */
     public function onPreUpdate(): void;
-
-    public function getId(): UuidInterface;
-
-    public function getMessage(): string;
-
-    public function setMessage(string $message): void;
-
-    public function getTitle(): string;
-
-    public function setTitle(string $title): void;
-
-    public function setCreated(DateTime $created): void;
-
-    public function getCreated(): DateTime;
-
-    public function setUpdated(DateTime $updated): void;
-
-    public function getUpdated(): DateTime;
 }
