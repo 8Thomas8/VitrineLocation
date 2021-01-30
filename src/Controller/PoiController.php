@@ -45,9 +45,13 @@ final class PoiController extends AbstractController implements EntityController
     public function createAction(Request $request): JsonResponse
     {
         $content = $request->toArray();
+        $orderNb = $content['orderNb'];
         $title = $content['title'];
         $message = $content['message'];
 
+        if (empty($orderNb)) {
+            throw new BadRequestHttpException('Order cannot be empty');
+        }
         if (empty($title)) {
             throw new BadRequestHttpException('Title cannot be empty');
         }
@@ -56,6 +60,7 @@ final class PoiController extends AbstractController implements EntityController
         }
 
         $poi = new Poi();
+        $poi->setOrderNb($orderNb);
         $poi->setTitle($title);
         $poi->setMessage($message);
         $this->em->persist($poi);
@@ -100,6 +105,7 @@ final class PoiController extends AbstractController implements EntityController
         $poi = $this->em->getRepository(Poi::class)->find($id);
         $poiUpdated = json_decode($request->getContent(), true);
 
+        empty($poiUpdated['orderNb']) ? true : $poi->setOrderNb($poiUpdated['orderNb']);
         empty($poiUpdated['title']) ? true : $poi->setTitle($poiUpdated['title']);
         empty($poiUpdated['message']) ? true : $poi->setMessage($poiUpdated['message']);
 

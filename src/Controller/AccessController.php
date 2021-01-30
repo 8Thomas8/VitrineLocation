@@ -45,9 +45,13 @@ final class AccessController extends AbstractController implements EntityControl
     public function createAction(Request $request): JsonResponse
     {
         $content = $request->toArray();
+        $orderNb = $content['orderNb'];
         $title = $content['title'];
         $message = $content['message'];
 
+        if (empty($orderNb)) {
+            throw new BadRequestHttpException('Order cannot be empty');
+        }
         if (empty($title)) {
             throw new BadRequestHttpException('Title cannot be empty');
         }
@@ -56,6 +60,7 @@ final class AccessController extends AbstractController implements EntityControl
         }
 
         $access = new Access();
+        $access->setOrderNb($orderNb);
         $access->setTitle($title);
         $access->setMessage($message);
         $this->em->persist($access);
@@ -100,6 +105,7 @@ final class AccessController extends AbstractController implements EntityControl
         $access = $this->em->getRepository(Access::class)->find($id);
         $accessUpdated = json_decode($request->getContent(), true);
 
+        empty($accessUpdated['orderNb']) ? true : $access->setOrderNb($accessUpdated['orderNb']);
         empty($accessUpdated['title']) ? true : $access->setTitle($accessUpdated['title']);
         empty($accessUpdated['message']) ? true : $access->setMessage($accessUpdated['message']);
 

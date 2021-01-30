@@ -46,9 +46,13 @@ final class DescriptionController extends AbstractController implements EntityCo
     public function createAction(Request $request): JsonResponse
     {
         $content = $request->toArray();
+        $orderNb = $content['orderNb'];
         $title = $content['title'];
         $message = $content['message'];
 
+        if (empty($orderNb)) {
+            throw new BadRequestHttpException('Order cannot be empty');
+        }
         if (empty($title)) {
             throw new BadRequestHttpException('Title cannot be empty');
         }
@@ -57,6 +61,7 @@ final class DescriptionController extends AbstractController implements EntityCo
         }
 
         $description = new Description();
+        $description->setOrderNb($orderNb);
         $description->setTitle($title);
         $description->setMessage($message);
         $this->em->persist($description);
@@ -101,6 +106,7 @@ final class DescriptionController extends AbstractController implements EntityCo
         $description = $this->em->getRepository(Description::class)->find($id);
         $descriptionUpdated = json_decode($request->getContent(), true);
 
+        empty($descriptionUpdated['orderNb']) ? true : $description->setOrderNb($descriptionUpdated['orderNb']);
         empty($descriptionUpdated['title']) ? true : $description->setTitle($descriptionUpdated['title']);
         empty($descriptionUpdated['message']) ? true : $description->setMessage($descriptionUpdated['message']);
 
