@@ -22,7 +22,7 @@ class PoiCrudController extends AbstractCrudController
         return [
             TextField::new('title'),
             TextareaField::new('message'),
-            NumberField::new('order'),
+            NumberField::new('orderNb'),
             DateTimeField::new('created'),
             DateTimeField::new('updated'),
         ];

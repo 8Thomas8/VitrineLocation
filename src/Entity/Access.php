@@ -27,11 +27,11 @@ class Access implements Feature
     private $id;
 
     /**
-     * @ORM\Column(name="order", type="integer")
+     * @ORM\Column(name="orderNb", type="integer")
      *
      * @var integer
      */
-    private $order;
+    private $orderNb;
 
     /**
      * @ORM\Column(name="title", type="string")
@@ -89,24 +89,18 @@ class Access implements Feature
         return $this->id;
     }
 
-    /**
-     * @return int
-     */
-    public function getOrder(): int
+    public function getOrderNb(): int
     {
-        if ($this->order == NULL) {
-            $this->order = 0;
+        if ($this->orderNb == NULL) {
+            $this->orderNb = 0;
         }
 
-        return $this->order;
+        return $this->orderNb;
     }
 
-    /**
-     * @param int $order
-     */
-    public function setOrder(int $order): void
+    public function setOrderNb(int $orderNb): void
     {
-        $this->order = $order;
+        $this->orderNb = $orderNb;
     }
 
     public function getMessage(): string
