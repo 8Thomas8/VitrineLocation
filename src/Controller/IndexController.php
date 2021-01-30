@@ -11,7 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 final class IndexController extends AbstractController
 {
     /**
-     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!admin|!api|_(profiler|wdt)).*"}, name="vue-index")
+     * @Route("/{vueRouting}", requirements={"vueRouting"="^(?!admin|api|_(profiler|wdt)).*"}, name="vue-index")
      * @return Response
      */
     public function vueRouting(): Response
@@ -20,7 +20,7 @@ final class IndexController extends AbstractController
     }
 
     /**
-     * @Route("/", requirements={"vueRouting"="^(?!admin|!api|_(profiler|wdt)).*"}, name="base-index")
+     * @Route("/", requirements={"vueRouting"="^(?!admin|api|_(profiler|wdt)).*"}, name="base-index")
      * @return Response
      */
     public function baseTemplate(): Response

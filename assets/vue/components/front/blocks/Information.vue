@@ -36,7 +36,7 @@
         xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"
       >
         <!-- Generator: Sketch 3.5.1 (25234) - http://www.bohemiancoding.com/sketch -->
-        <title>dots</title>
+        <title>Loader</title>
         <desc>Created with Sketch.</desc>
         <defs />
         <g
