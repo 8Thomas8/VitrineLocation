@@ -136,7 +136,7 @@ export default Vue.extend({
   name: "Contact",
   data() {
     return {
-      errors: [""],
+      errors: [],
       lastname: null,
       firstname: null,
       email: null,
@@ -167,7 +167,7 @@ export default Vue.extend({
         this.errors.push("Sujet requis.");
       }
       if (!this.content) {
-        this.errors.push("Contenu du message requis");
+        this.errors.push("Contenu du message requis.");
       }
 
       if (!this.errors.length) {
