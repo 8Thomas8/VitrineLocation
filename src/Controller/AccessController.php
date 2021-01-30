@@ -20,8 +20,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 /**
  * @Rest\Route("/api")
- * @IsGranted("IS_AUTHENTICATED_FULLY")
  */
+//@IsGranted("IS_AUTHENTICATED_FULLY")
 final class AccessController extends AbstractController implements EntityController
 {
     /** @var EntityManagerInterface */
