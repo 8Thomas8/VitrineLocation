@@ -14,9 +14,24 @@
       </div>
 
       <Information
-        v-for="category in categories"
-        :key="category"
-        :category="category"
+        :features="descriptions"
+        :name="'Description'"
+        :map="false"
+        :loading="descriptionLoading"
+      />
+
+      <Information
+        :features="poiCollection"
+        :name="'Points d\'interêt'"
+        :map="false"
+        :loading="poiLoading"
+      />
+      
+      <Information
+        :features="accessCollection"
+        :name="'Accès'"
+        :map="true"
+        :loading="accessLoading"
       />
     </div>
   </div>
@@ -28,101 +43,40 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "Informations",
-  components: { Information },
-  data() {
-    return {
-      categories: {
-        description: {
-          name: "Description de l'appartement",
-          features: {
-            feature1: {
-              title: "Vue sur mer",
-              desc:
-                "Vous aurez toujours une vue magnifique sur la mer depuis la terrasse."
-            },
-            feature2: {
-              title: "2 chambres",
-              desc:
-                "Idéal pour 2 couples ou pour un couple avec enfants. 1 lit double, et 2 lits jumeaux."
-            },
-            feature3: {
-              title: "2 salles de bain",
-              desc:
-                "Les 2 salles de bain sont équipés de douche, de lavabo. L'un d'elles est équipée d'une baignoire."
-            },
-            feature4: {
-              title: "Electroménager complet",
-              desc: "Four, four micro-ondes, lave-vaisselle, machine à laver."
-            },
-            feature5: {
-              title: "Wifi",
-              desc:
-                "L'accès à internet est compris dans le prix de la location."
-            },
-            feature6: {
-              title: "Climatisation réversible",
-              desc:
-                "Possibilité de refroidir l'appartement, ainsi que de le chauffer."
-            },
-            feature7: {
-              title: "Ascenseur",
-              desc:
-                "Accès à l'appartement via ascenceur. Accessible pour les fauteuils roulants."
-            },
-            feature8: {
-              title: "Parking souterrain",
-              desc: "1 place de parking est réservée pour l'appartement."
-            },
-            feature9: {
-              title: "5 piscines à disposition",
-              desc:
-                "Toutes les piscines du domaine sont accessibles, la plus proche est à 200m."
-            },
-            feature10: {
-              title: "Résidence sécurisée",
-              desc:
-                "Portail à l'entrée de la résidence, surveillé par un vigile 24h/24."
-            }
-          }
-        },
-        poi: {
-          name: "Points d'intérêts",
-          features: {
-            feature1: {
-              title: "Proximité de la plage",
-              desc: "Seulement 200m vous séparent de la plage."
-            },
-            feature2: {
-              title: "Proximité du port",
-              desc: "Port de plaisance situé à 500m, accessible à pied."
-            },
-            feature3: {
-              title: "Proximité des commerces",
-              desc: "Boulangerie et épicerie accessibles à pied."
-            }
-          }
-        },
-        acces: {
-          name: "Accès",
-          features: {
-            feature1: {
-              title: "Duquesa Village",
-              desc: "Résidence balnéaire sécurisée."
-            },
-            feature2: {
-              title: "Proche aéroport",
-              desc:
-                "1h de route depuis l'aéroport pour être au bord des plages."
-            },
-            feature3: {
-              title: "Location de voiture",
-              desc: "Simplicité d'accès à un véhicule sans quitter l'aéroport."
-            }
-          },
-          map: true
-        }
-      }
-    };
-  }
+  components: {Information},
+  computed: {
+    descriptionLoading() {
+      return this.$store.getters["description/isLoading"];
+    },
+    hasDescriptions() {
+      return this.$store.getters["description/hasDescriptions"];
+    },
+    descriptions() {
+      return this.$store.getters["description/descriptions"];
+    },
+    accessLoading() {
+      return this.$store.getters["access/isLoading"];
+    },
+    hasAccess() {
+      return this.$store.getters["access/hasAccess"];
+    },
+    accessCollection() {
+      return this.$store.getters["access/accessCollection"];
+    },
+    poiLoading() {
+      return this.$store.getters["poi/isLoading"];
+    },
+    hasPoi() {
+      return this.$store.getters["poi/hasPoi"];
+    },
+    poiCollection() {
+      return this.$store.getters["poi/poiCollection"];
+    }
+  },
+  created() {
+    this.$store.dispatch("description/findAll");
+    this.$store.dispatch("access/findAll");
+    this.$store.dispatch("poi/findAll");
+  },
 });
 </script>
