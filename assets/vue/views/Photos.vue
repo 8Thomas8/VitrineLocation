@@ -64,6 +64,12 @@
   </div>
 </template>
 
+<!--TODO: This is how to loop on images-->
+<!--<img-->
+<!--    v-for="image in images"-->
+<!--    :src="'uploads/' + image.file"-->
+<!--&gt;-->
+
 <script lang="ts">
 import Photo from "../components/front/Photo.vue";
 import ModalPhoto from "../components/front/modals/ModalPhoto.vue";
@@ -71,7 +77,7 @@ import Vue from "vue";
 
 export default Vue.extend({
   name: "Photos",
-  components: { Photo, ModalPhoto },
+  components: {Photo, ModalPhoto},
   data() {
     return {
       showModal: false,
@@ -115,6 +121,20 @@ export default Vue.extend({
       },
       modalPhoto: null
     };
-  }
+  },
+  computed: {
+    imageLoading() {
+      return this.$store.getters["image/isLoading"];
+    },
+    hasImages() {
+      return this.$store.getters["image/hasImage"];
+    },
+    images() {
+      return this.$store.getters["image/images"];
+    }
+  },
+  created() {
+    this.$store.dispatch("image/findAll");
+  },
 });
 </script>
