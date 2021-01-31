@@ -20,12 +20,7 @@ interface EntityController
 {
     public function __construct(EntityManagerInterface $em, SerializerInterface $serializer);
 
-    /**
-     * @param Request $request
-     * @return JsonResponse
-     */
-    public function createAction(Request $request): JsonResponse;
-    
+
     public function findAllAction(): JsonResponse;
 
     /**
@@ -33,17 +28,4 @@ interface EntityController
      * @return JsonResponse
      */
     public function findOneAction(string $id): JsonResponse;
-
-    /**
-     * @param Request $request
-     * @param string $id
-     * @return JsonResponse
-     */
-    public function updateOneAction(Request $request, string $id): JsonResponse;
-
-    /**
-     * @param string $id
-     * @return JsonResponse
-     */
-    public function deleteOneAction(string $id): JsonResponse;
 }

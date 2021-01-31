@@ -37,40 +37,6 @@ final class PoiController extends AbstractController implements EntityController
     }
 
     /**
-     * @param Request $request
-     * @return JsonResponse
-     * @Rest\Post("/pois", name="createPoi")
-     * @IsGranted ("ROLE_ADMIN")
-     */
-    public function createAction(Request $request): JsonResponse
-    {
-        $content = $request->toArray();
-        $orderNb = $content['orderNb'];
-        $title = $content['title'];
-        $message = $content['message'];
-
-        if (empty($orderNb)) {
-            throw new BadRequestHttpException('Order cannot be empty');
-        }
-        if (empty($title)) {
-            throw new BadRequestHttpException('Title cannot be empty');
-        }
-        if (empty($message)) {
-            throw new BadRequestHttpException('Message cannot be empty');
-        }
-
-        $poi = new Poi();
-        $poi->setOrderNb($orderNb);
-        $poi->setTitle($title);
-        $poi->setMessage($message);
-        $this->em->persist($poi);
-        $this->em->flush();
-        $data = $this->serializer->serialize($poi, JsonEncoder::FORMAT);
-
-        return new JsonResponse($data, Response::HTTP_CREATED, [], true);
-    }
-
-    /**
      * @Rest\Get("/pois", name="findAllPois")
      */
     public function findAllAction(): JsonResponse
@@ -92,44 +58,5 @@ final class PoiController extends AbstractController implements EntityController
         $data = $this->serializer->serialize($poi, JsonEncoder::FORMAT);
 
         return new JsonResponse($data, Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * @Rest\Put("/pois/{id}", name="UpdateOnePoi")
-     * @param Request $request
-     * @param string $id
-     * @return JsonResponse
-     * @IsGranted ("ROLE_ADMIN")
-     */
-    public function updateOneAction(Request $request, string $id): JsonResponse
-    {
-        $poi = $this->em->getRepository(Poi::class)->find($id);
-        $poiUpdated = json_decode(strval($request->getContent()), true);
-
-        empty($poiUpdated['orderNb']) ? true : $poi->setOrderNb($poiUpdated['orderNb']);
-        empty($poiUpdated['title']) ? true : $poi->setTitle($poiUpdated['title']);
-        empty($poiUpdated['message']) ? true : $poi->setMessage($poiUpdated['message']);
-
-        $this->em->persist($poi);
-        $this->em->flush();
-        $data = $this->serializer->serialize($poi, JsonEncoder::FORMAT);
-
-        return new JsonResponse($data, Response::HTTP_OK, [], true);
-    }
-
-    /**
-     * @Rest\Delete("/pois/{id}", name="DeleteOnePoi")
-     * @param string $id
-     * @return JsonResponse
-     * @IsGranted ("ROLE_ADMIN")
-     */
-    public function deleteOneAction(string $id): JsonResponse
-    {
-        $poi = $this->em->getRepository(Poi::class)->find($id);
-
-        $this->em->remove($poi);
-        $this->em->flush();
-
-        return new JsonResponse("Poi deleted", Response::HTTP_OK, [], true);
     }
 }
