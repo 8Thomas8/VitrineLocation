@@ -145,16 +145,6 @@ class Image implements Entity
         $this->orderNb = $orderNb;
     }
 
-    public function getMessage(): string
-    {
-        return $this->message;
-    }
-
-    public function setMessage(string $message): void
-    {
-        $this->message = $message;
-    }
-
     public function getTitle(): string
     {
         return $this->title;
