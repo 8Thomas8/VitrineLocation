@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Entity;
 
-use Safe\DateTime;
-use App\Entity\EntityInterface\Feature;
+use DateTime;
+use App\Entity\EntityInterface\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Ramsey\Uuid\Uuid;
@@ -16,7 +16,7 @@ use Ramsey\Uuid\UuidInterface;
  * @ORM\Table(name="poi")
  * @ORM\HasLifecycleCallbacks
  */
-class Poi implements Feature
+class Poi implements Entity
 {
     /**
      * @ORM\Id

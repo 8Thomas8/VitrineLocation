@@ -14,7 +14,7 @@ use Ramsey\Uuid\UuidInterface;
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  */
-interface Feature
+interface Entity
 {
     /**
      * @ORM\PrePersist

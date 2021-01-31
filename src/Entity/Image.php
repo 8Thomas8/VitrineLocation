@@ -10,13 +10,14 @@ use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Ramsey\Uuid\Uuid;
 use Ramsey\Uuid\UuidInterface;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="description")
+ * @ORM\Table(name="Picture")
  * @ORM\HasLifecycleCallbacks
  */
-class Description implements Entity
+class Image implements Entity
 {
     /**
      * @ORM\Id
@@ -41,11 +42,34 @@ class Description implements Entity
     private $title;
 
     /**
-     * @ORM\Column(name="message", type="string")
+     * @ORM\Column(type="string")
      *
      * @var string
      */
-    private $message;
+    private $file;
+
+    /**
+     * @ORM\Column(type="boolean")
+     *
+     * @var boolean
+     */
+    private $display;
+
+    /**
+     * @return bool
+     */
+    public function isDisplay(): bool
+    {
+        return $this->display;
+    }
+
+    /**
+     * @param bool $display
+     */
+    public function setDisplay(bool $display): void
+    {
+        $this->display = $display;
+    }
 
     /**
      * @ORM\Column(name="created", type="datetime")
@@ -60,6 +84,24 @@ class Description implements Entity
      * @var DateTime|null
      */
     private $updated;
+
+    public function getFile(): string
+    {
+        return $this->file;
+    }
+
+    public function setFile($file)
+    {
+        $this->file = $file;
+    }
+
+    /**
+     * Updates the hash value to force the preUpdate and postUpdate events to fire.
+     */
+    public function refreshUpdated()
+    {
+        $this->setUpdated(new DateTime());
+    }
 
     /**
      * @ORM\PrePersist
