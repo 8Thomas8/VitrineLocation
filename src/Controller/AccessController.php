@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use function Safe\json_decode;
 use App\Controller\ControllerInterface\EntityController;
 use App\Entity\Access;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +22,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Rest\Route("/api")
  */
-//@IsGranted("IS_AUTHENTICATED_FULLY")
 final class AccessController extends AbstractController implements EntityController
 {
     /** @var EntityManagerInterface */
@@ -104,7 +104,7 @@ final class AccessController extends AbstractController implements EntityControl
     public function updateOneAction(Request $request, string $id): JsonResponse
     {
         $access = $this->em->getRepository(Access::class)->find($id);
-        $accessUpdated = json_decode($request->getContent(), true);
+        $accessUpdated = json_decode(strval($request->getContent()), true);
 
         empty($accessUpdated['orderNb']) ? true : $access->setOrderNb($accessUpdated['orderNb']);
         empty($accessUpdated['title']) ? true : $access->setTitle($accessUpdated['title']);

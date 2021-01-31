@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use function Safe\json_decode;
 use App\Controller\ControllerInterface\EntityController;
 use App\Entity\Poi;
 use Doctrine\ORM\EntityManagerInterface;
@@ -21,7 +22,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 /**
  * @Rest\Route("/api")
  */
-//@IsGranted("IS_AUTHENTICATED_FULLY")
 final class PoiController extends AbstractController implements EntityController
 {
     /** @var EntityManagerInterface */
@@ -104,7 +104,7 @@ final class PoiController extends AbstractController implements EntityController
     public function updateOneAction(Request $request, string $id): JsonResponse
     {
         $poi = $this->em->getRepository(Poi::class)->find($id);
-        $poiUpdated = json_decode($request->getContent(), true);
+        $poiUpdated = json_decode(strval($request->getContent()), true);
 
         empty($poiUpdated['orderNb']) ? true : $poi->setOrderNb($poiUpdated['orderNb']);
         empty($poiUpdated['title']) ? true : $poi->setTitle($poiUpdated['title']);

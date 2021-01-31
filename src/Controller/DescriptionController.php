@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use function Safe\json_decode;
 use App\Controller\ControllerInterface\EntityController;
 use App\Entity\Description;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
  * @Rest\Route("/api")
  *
  */
-//@IsGranted("IS_AUTHENTICATED_FULLY")
 final class DescriptionController extends AbstractController implements EntityController
 {
     /** @var EntityManagerInterface */
@@ -106,7 +106,7 @@ final class DescriptionController extends AbstractController implements EntityCo
     public function updateOneAction(Request $request, string $id): JsonResponse
     {
         $description = $this->em->getRepository(Description::class)->find($id);
-        $descriptionUpdated = json_decode($request->getContent(), true);
+        $descriptionUpdated = json_decode(strval($request->getContent()), true);
 
         empty($descriptionUpdated['orderNb']) ? true : $description->setOrderNb($descriptionUpdated['orderNb']);
         empty($descriptionUpdated['title']) ? true : $description->setTitle($descriptionUpdated['title']);
