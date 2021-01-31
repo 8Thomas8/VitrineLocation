@@ -5,9 +5,6 @@
     "composer/package-versions-deprecated": {
         "version": "1.11.99.1"
     },
-    "dealerdirect/phpcodesniffer-composer-installer": {
-        "version": "v0.7.1"
-    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -22,9 +19,6 @@
     },
     "doctrine/cache": {
         "version": "1.10.2"
-    },
-    "doctrine/coding-standard": {
-        "version": "8.2.0"
     },
     "doctrine/collections": {
         "version": "1.6.7"
@@ -147,9 +141,6 @@
     "phpdocumentor/type-resolver": {
         "version": "1.4.0"
     },
-    "phpstan/phpdoc-parser": {
-        "version": "0.4.9"
-    },
     "phpstan/phpstan": {
         "version": "0.12.64"
     },
@@ -193,21 +184,6 @@
         },
         "files": [
             "./config/packages/sensio_framework_extra.yaml"
-        ]
-    },
-    "slevomat/coding-standard": {
-        "version": "6.4.1"
-    },
-    "squizlabs/php_codesniffer": {
-        "version": "3.0",
-        "recipe": {
-            "repo": "github.com/symfony/recipes-contrib",
-            "branch": "master",
-            "version": "3.0",
-            "ref": "0dc9cceda799fd3a08b96987e176a261028a3709"
-        },
-        "files": [
-            "./phpcs.xml.dist"
         ]
     },
     "symfony/apache-pack": {
