@@ -1,3 +1,5 @@
+[![CodeFactor](https://www.codefactor.io/repository/github/8thomas8/vitrinelocation/badge)](https://www.codefactor.io/repository/github/8thomas8/vitrinelocation)
+
 # Site vitrine pour une location de vacance.
 
 ## Réalisation avec
