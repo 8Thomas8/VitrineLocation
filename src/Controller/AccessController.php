@@ -99,6 +99,7 @@ final class AccessController extends AbstractController implements EntityControl
      * @param Request $request
      * @param string $id
      * @return JsonResponse
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function updateOneAction(Request $request, string $id): JsonResponse
     {
@@ -120,6 +121,7 @@ final class AccessController extends AbstractController implements EntityControl
      * @Rest\Delete("/access/{id}", name="DeleteOneAccess")
      * @param string $id
      * @return JsonResponse
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function deleteOneAction(string $id): JsonResponse
     {

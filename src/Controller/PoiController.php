@@ -99,6 +99,7 @@ final class PoiController extends AbstractController implements EntityController
      * @param Request $request
      * @param string $id
      * @return JsonResponse
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function updateOneAction(Request $request, string $id): JsonResponse
     {
@@ -120,6 +121,7 @@ final class PoiController extends AbstractController implements EntityController
      * @Rest\Delete("/pois/{id}", name="DeleteOnePoi")
      * @param string $id
      * @return JsonResponse
+     * @IsGranted ("ROLE_ADMIN")
      */
     public function deleteOneAction(string $id): JsonResponse
     {
