@@ -18,4 +18,4 @@
 1. Construisez la base de donnée avec les commandes `php bin/console make:migration` puis `php bin/console doctrine:migrations:migrate`
 1. Ajouter un user dans la base de donnée (pour chiffrer le mot de passe, utilisez `php bin/console security:encode-password`
 1. Lancer le serveur symfony `symfony serve --no-tls`
-1. Visitez <a>127.0.0.1:8000</a>
+1. Visitez <a>127.0.0.1:8000</a> ou <a>127.0.0.1:8000/admin</a> pour le BackOffice
